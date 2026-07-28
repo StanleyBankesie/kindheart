@@ -67,11 +67,21 @@ export function useSocket() {
       globalHolder.authKey = "";
     }
 
-    const backendOrigin =
-      import.meta.env.VITE_API_PROXY_TARGET || window.location.origin;
+    import api from "../api/client";
     const transportPref = (
       import.meta.env.VITE_SOCKET_TRANSPORT || ""
     ).toLowerCase();
+    
+    let backendOrigin = window.location.origin;
+    if (import.meta.env.VITE_API_PROXY_TARGET) {
+      backendOrigin = import.meta.env.VITE_API_PROXY_TARGET;
+    } else if (api.defaults.baseURL && api.defaults.baseURL.startsWith("http")) {
+      try {
+        backendOrigin = new URL(api.defaults.baseURL).origin;
+      } catch (e) {
+        // Fallback if URL is invalid
+      }
+    }
     const transports =
       transportPref === "websocket" ? ["websocket"] : ["polling", "websocket"];
     const newSocket = io(backendOrigin, {
