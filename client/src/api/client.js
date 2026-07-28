@@ -62,6 +62,8 @@ if (
 } else if (!API_BASE) {
   // Default to same-origin so Vite dev proxy handles local API traffic.
   API_BASE = "/api";
+} else if (API_BASE && !API_BASE.startsWith("http") && !API_BASE.startsWith("/")) {
+  API_BASE = "/" + API_BASE;
 }
 api.defaults.baseURL = API_BASE;
 
