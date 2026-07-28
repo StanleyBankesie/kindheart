@@ -127,7 +127,7 @@ export const projectManagementSections = [
         icon: "💸",
       },
       {
-        title: "Project Billings & Income",
+        title: "Project Income",
         path: "/project-management/income",
         description: "Project milestone billings and income tracking",
         icon: "💵",
@@ -279,85 +279,112 @@ function ProjectManagementLanding() {
 
 /**
  *  component
- * 
+ *
  * @returns {JSX.Element} The rendered component
  */
 export default function ProjectManagementHome() {
   return (
-    <ModuleLayout sections={projectManagementSections} moduleKey="project-management">
+    <ModuleLayout
+      sections={projectManagementSections}
+      moduleKey="project-management"
+    >
       <Routes>
         <Route path="/" element={<ProjectManagementLanding />} />
-      <Route path="dashboard" element={<ProjectManagementDashboardPage />} />
+        <Route path="dashboard" element={<ProjectManagementDashboardPage />} />
 
-      <Route path="/projects" element={<ProjectList />} />
-      <Route path="/projects/new" element={<ProjectForm />} />
-      <Route path="/projects/:id/edit" element={<ProjectForm />} />
-      <Route path="/projects/:id" element={<ProjectForm />} />
-      <Route
-        path="/projects/:id/dashboard"
-        element={<ProjectDetailDashboard />}
-      />
+        <Route path="/projects" element={<ProjectList />} />
+        <Route path="/projects/new" element={<ProjectForm />} />
+        <Route path="/projects/:id/edit" element={<ProjectForm />} />
+        <Route path="/projects/:id" element={<ProjectForm />} />
+        <Route
+          path="/projects/:id/dashboard"
+          element={<ProjectDetailDashboard />}
+        />
 
-      <Route path="/tasks" element={<TaskList />} />
-      <Route path="/tasks/execution" element={<TaskExecution />} />
-      <Route path="/tasks/new" element={<TaskForm />} />
-      <Route path="/tasks/:id" element={<TaskForm />} />
+        <Route path="/tasks" element={<TaskList />} />
+        <Route path="/tasks/execution" element={<TaskExecution />} />
+        <Route path="/tasks/new" element={<TaskForm />} />
+        <Route path="/tasks/:id" element={<TaskForm />} />
 
-      <Route path="/expenses" element={<ExpenseList />} />
-      <Route path="/income" element={<ProjectIncomeList />} />
+        <Route path="/expenses" element={<ExpenseList />} />
+        <Route path="/income" element={<ProjectIncomeList />} />
 
-      <Route path="/reports" element={<ProjectReports />} />
-      <Route path="/reports/task-execution" element={<TaskExecutionReportPage />} />
-      <Route path="/reports/project-status" element={<ProjectStatusReport />} />
-      <Route path="/reports/project-income" element={<ProjectIncomeReport />} />
-      <Route path="/reports/project-expense" element={<ProjectExpenseReport />} />
-      <Route path="/reports/task-management-and-execution" element={<TaskManagementAndExecutionPage />} />
+        <Route path="/reports" element={<ProjectReports />} />
+        <Route
+          path="/reports/task-execution"
+          element={<TaskExecutionReportPage />}
+        />
+        <Route
+          path="/reports/project-status"
+          element={<ProjectStatusReport />}
+        />
+        <Route
+          path="/reports/project-income"
+          element={<ProjectIncomeReport />}
+        />
+        <Route
+          path="/reports/project-expense"
+          element={<ProjectExpenseReport />}
+        />
+        <Route
+          path="/reports/task-management-and-execution"
+          element={<TaskManagementAndExecutionPage />}
+        />
 
-      <Route path="/setup" element={<PMSetup />} />
+        <Route path="/setup" element={<PMSetup />} />
 
-      <Route
-        path="/material-requisitions"
-        element={<PMMaterialRequisitionList />}
-      />
-      <Route
-        path="/material-requisitions/new"
-        element={<PMMaterialRequisitionForm />}
-      />
-      <Route
-        path="/material-requisitions/:id"
-        element={<PMMaterialRequisitionForm />}
-      />
+        <Route
+          path="/material-requisitions"
+          element={<PMMaterialRequisitionList />}
+        />
+        <Route
+          path="/material-requisitions/new"
+          element={<PMMaterialRequisitionForm />}
+        />
+        <Route
+          path="/material-requisitions/:id"
+          element={<PMMaterialRequisitionForm />}
+        />
 
-      <Route
-        path="/material-utilizations"
-        element={<PMMaterialUtilizationList />}
-      />
-      <Route
-        path="/material-utilizations/new"
-        element={<PMMaterialUtilizationForm />}
-      />
-      <Route
-        path="/material-utilizations/:id"
-        element={<PMMaterialUtilizationForm />}
-      />
+        <Route
+          path="/material-utilizations"
+          element={<PMMaterialUtilizationList />}
+        />
+        <Route
+          path="/material-utilizations/new"
+          element={<PMMaterialUtilizationForm />}
+        />
+        <Route
+          path="/material-utilizations/:id"
+          element={<PMMaterialUtilizationForm />}
+        />
 
-      <Route path="/material-receipts" element={<PMMaterialReceiptList />} />
-      <Route
-        path="/material-receipts/new"
-        element={<PMMaterialReceiptForm />}
-      />
-      <Route
-        path="/material-receipts/:id"
-        element={<PMMaterialReceiptForm />}
-      />
+        <Route path="/material-receipts" element={<PMMaterialReceiptList />} />
+        <Route
+          path="/material-receipts/new"
+          element={<PMMaterialReceiptForm />}
+        />
+        <Route
+          path="/material-receipts/:id"
+          element={<PMMaterialReceiptForm />}
+        />
 
-      <Route path="/project-orders" element={<ProjectOrderList />} />
-      <Route path="/project-orders/new" element={<ProjectOrderForm />} />
-      <Route path="/project-orders/:id" element={<ProjectOrderForm />} />
+        <Route path="/project-orders" element={<ProjectOrderList />} />
+        <Route path="/project-orders/new" element={<ProjectOrderForm />} />
+        <Route path="/project-orders/:id" element={<ProjectOrderForm />} />
 
-      <Route path="/purchase-requisitions" element={<PMPurchaseRequisitionList />} />
-      <Route path="/purchase-requisitions/new" element={<PMPurchaseRequisitionForm />} />
-      <Route path="/purchase-requisitions/:id" element={<PMPurchaseRequisitionForm />} />
+        <Route
+          path="/purchase-requisitions"
+          element={<PMPurchaseRequisitionList />}
+        />
+        <Route
+          path="/purchase-requisitions/new"
+          element={<PMPurchaseRequisitionForm />}
+        />
+        <Route
+          path="/purchase-requisitions/:id"
+          element={<PMPurchaseRequisitionForm />}
+        />
       </Routes>
     </ModuleLayout>
   );
