@@ -1,14 +1,21 @@
 const http = require('http');
 
-const req = http.get('http://localhost:4002/api/sales/orders?page=1', (res) => {
-  console.log(`STATUS: ${res.statusCode}`);
+const options = {
+  hostname: 'localhost',
+  port: 5000,
+  path: '/api/sales/prices/best-price',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const req = http.request(options, (res) => {
   let data = '';
-  res.on('data', (chunk) => { data += chunk; });
-  res.on('end', () => {
-    console.log(`BODY: ${data.substring(0, 100)}...`);
-  });
+  res.on('data', chunk => data += chunk);
+  res.on('end', () => console.log('Response:', res.statusCode, data));
 });
 
-req.on('error', (e) => {
-  console.error(`problem with request: ${e.message}`);
-});
+req.on('error', e => console.error(e));
+req.write(JSON.stringify({ product_id: 4, quantity: 1 }));
+req.end();
