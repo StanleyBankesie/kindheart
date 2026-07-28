@@ -997,37 +997,50 @@ app.get("/api/debug-crash-log", requireAuthMiddleware, (req, res) => {
 });
 
 app.use("/api/", healthRoutes);
+app.use("/", healthRoutes);
+
 app.use("/api", requireLicense);
-app.use("/api/licenses", licenseRoutes);
-app.use("/api/payment-packages", paymentPackageRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/administration", adminRoutes);
-app.use(["/api/backups", "/backups"], backupRoutes);
-app.use("/api/workflows", workflowRoutes);
-app.use("/api/upload", uploadRoutes);
-app.use("/api/sales", salesRoutes);
-app.use("/api/purchase/bills", purchaseBillsRoutes);
-app.use("/api/purchase", purchaseRoutes);
-app.use("/api/inventory", inventoryRoutes);
-app.use("/api/finance", financeRoutes);
-app.use("/api/hr", hrRoutes);
-app.use("/api/maintenance", maintenanceRoutes);
-app.use("/api/projects", projectsRoutes);
-app.use("/api/production", productionRoutes);
-app.use("/api/pos", posRoutes);
-app.use("/api/bi", biRoutes);
-app.use("/api/service-management", serviceMgmtRoutes);
-app.use("/api/services", srvInvoicesRoutes);
-app.use("/api/transport", transportRoutes);
+app.use("/", requireLicense);
+
+const apiPaths = [
+  { path: "/licenses", router: licenseRoutes },
+  { path: "/payment-packages", router: paymentPackageRoutes },
+  { path: "/admin", router: adminRoutes },
+  { path: "/administration", router: adminRoutes },
+  { path: "/backups", router: backupRoutes },
+  { path: "/workflows", router: workflowRoutes },
+  { path: "/upload", router: uploadRoutes },
+  { path: "/sales", router: salesRoutes },
+  { path: "/purchase/bills", router: purchaseBillsRoutes },
+  { path: "/purchase", router: purchaseRoutes },
+  { path: "/inventory", router: inventoryRoutes },
+  { path: "/finance", router: financeRoutes },
+  { path: "/hr", router: hrRoutes },
+  { path: "/maintenance", router: maintenanceRoutes },
+  { path: "/projects", router: projectsRoutes },
+  { path: "/production", router: productionRoutes },
+  { path: "/pos", router: posRoutes },
+  { path: "/bi", router: biRoutes },
+  { path: "/service-management", router: serviceMgmtRoutes },
+  { path: "/services", router: srvInvoicesRoutes },
+  { path: "/transport", router: transportRoutes },
+  { path: "/push", router: pushRoutes },
+  { path: "/templates", router: templatesRoutes },
+  { path: "/documents", router: documentsRoutes },
+  { path: "/social-feed", router: socialFeedRoutes },
+  { path: "/access", router: accessRoutes },
+  { path: "/chat", router: chatRoutes },
+  { path: "/email-test", router: emailTestRoutes },
+  { path: "/visitors", router: visitorsRoutes },
+];
+
+apiPaths.forEach(({ path, router }) => {
+  app.use(`/api${path}`, router);
+  app.use(path, router);
+});
+
 app.use("/api", authRoutes);
-app.use("/api/push", pushRoutes);
-app.use("/api/templates", templatesRoutes);
-app.use("/api/documents", documentsRoutes);
-app.use("/api/social-feed", socialFeedRoutes);
-app.use("/api/access", accessRoutes);
-app.use("/api/chat", chatRoutes);
-app.use("/api/email-test", emailTestRoutes);
-app.use("/api/visitors", visitorsRoutes);
+app.use("/", authRoutes);
 
 /* ---------------- STATIC FILES & SPA FALLBACK ---------------- */
 // Use the frontend path already discovered by the early static block above.
