@@ -56,9 +56,9 @@ export const api = axios.create({
 let API_BASE = import.meta.env.VITE_API_BASE_URL;
 if (
   typeof window !== "undefined" &&
-  window.location.hostname.includes("demo.omnisuite-erp.com")
+  window.location.hostname.includes("kindheart.omnisuite-erp.com")
 ) {
-  API_BASE = "https://demoserver.omnisuite-erp.com/api";
+  API_BASE = "https://kindserver.omnisuite-erp.com/api";
 } else if (!API_BASE) {
   // Default to same-origin so Vite dev proxy handles local API traffic.
   API_BASE = "/api";
