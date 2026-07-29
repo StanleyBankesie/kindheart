@@ -2819,7 +2819,7 @@ router.get(
 
       res.json({
         data: {
-          api_key: apiKey,
+          api_key: apiKey ? "********" : "",
         },
       });
     } catch (err) {
@@ -2835,6 +2835,10 @@ router.post(
   async (req, res, next) => {
     try {
       const api_key = String(req.body?.api_key || "").trim();
+
+      if (api_key === "********") {
+        return res.json({ success: true, message: "No change" });
+      }
 
       // 1. Update in-memory process.env
       process.env.GOOGLE_MAPS_API_KEY = api_key;

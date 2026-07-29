@@ -198,6 +198,16 @@ export default function GeneralSettingsPage() {
       setEnvSaving(true);
       await api.post("/admin/settings/env", envVars);
       toast.success("Environment configurations saved successfully.");
+      
+      // Reload the variables to get the "********" masked values from the backend
+      const res = await api.get("/admin/settings/env");
+      setEnvVars(prev => ({
+        ...prev,
+        ARKESEL_API_KEY: res.data.ARKESEL_API_KEY || "",
+        ARKESEL_SENDER_ID: res.data.ARKESEL_SENDER_ID || "",
+        GREEN_API_TOKEN_INSTANCE: res.data.GREEN_API_TOKEN_INSTANCE || "",
+        SMTP_PASS: res.data.SMTP_PASS || ""
+      }));
     } catch (e) {
       toast.error(e?.response?.data?.message || e?.message || "Failed to save environment variables");
     } finally {
@@ -210,6 +220,10 @@ export default function GeneralSettingsPage() {
       setGoogleMapsSaving(true);
       await api.post("/admin/settings/google-maps", { api_key: googleMapsApiKey });
       toast.success("Google Maps settings saved");
+      const res = await api.get("/admin/settings/google-maps");
+      if (res?.data?.data?.api_key) {
+        setGoogleMapsApiKey(res.data.data.api_key);
+      }
     } catch (e) {
       toast.error(e?.response?.data?.message || e?.message || "Failed to save settings");
     } finally { setGoogleMapsSaving(false); }
