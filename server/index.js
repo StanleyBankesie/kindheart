@@ -401,6 +401,7 @@ const corsOptions = {
     "x-branch-id",
     "x-user-id",
     "x-skip-offline-queue",
+    "x-access-token",
   ],
   optionsSuccessStatus: 204,
 };
