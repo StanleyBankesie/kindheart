@@ -27,8 +27,8 @@ export default function PosOnHold() {
   const [actionId, setActionId] = useState(null);
   const [search, setSearch] = useState("");
   const today = () => new Date().toISOString().split("T")[0];
-  const [fromDate, setFromDate] = useState(today);
-  const [toDate, setToDate] = useState(today);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   useEffect(() => {
     loadOnHold();

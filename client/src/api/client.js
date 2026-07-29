@@ -59,7 +59,8 @@ if (
   typeof window !== "undefined" &&
   window.location.hostname.includes("kindheart.omnisuite-erp.com")
 ) {
-  API_BASE = "https://kindserver.omnisuite-erp.com/api";
+  // Use same-origin since backend and frontend are hosted monolithically
+  API_BASE = "/api";
 } else if (!API_BASE) {
   // Default to same-origin so Vite dev proxy handles local API traffic.
   API_BASE = "/api";

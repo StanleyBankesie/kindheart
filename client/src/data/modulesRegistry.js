@@ -229,6 +229,8 @@ export const MODULES_REGISTRY = {
       { key: "material-utilizations", label: "Material Utilization", type: "feature" },
       { key: "material-receipts", label: "Materials Receipt", type: "feature" },
       { key: "project-orders", label: "Project Orders", type: "feature" },
+      { key: "quotations", label: "Project Quotations", type: "feature" },
+      { key: "project-invoices", label: "Project Invoices", type: "feature" },
       { key: "purchase-requisitions", label: "Purchase Requisition", type: "feature" },
       { key: "milestones", label: "Milestones", type: "feature" },
       { key: "resources", label: "Resource Management", type: "feature" },

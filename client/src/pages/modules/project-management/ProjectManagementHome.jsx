@@ -36,6 +36,10 @@ import ProjectExpenseReport from "./reports/ProjectExpenseReport.jsx";
 import TaskExecutionReportPage from "./reports/TaskExecutionReportPage.jsx";
 import TaskManagementAndExecutionPage from "./reports/TaskManagementAndExecutionPage.jsx";
 import ProjectManagementDashboardPage from "./ProjectManagementDashboardPage.jsx";
+import ProjectQuotationList from "./quotations/ProjectQuotationList.jsx";
+import ProjectQuotationForm from "./quotations/ProjectQuotationForm.jsx";
+import ProjectInvoiceList from "./project-invoices/ProjectInvoiceList.jsx";
+import ProjectInvoiceForm from "./project-invoices/ProjectInvoiceForm.jsx";
 
 export const projectManagementSections = [
   {
@@ -60,6 +64,12 @@ export const projectManagementSections = [
         description: "Project categories, types, and WBS templates",
         icon: "⚙️",
       },
+      {
+        title: "Milestones",
+        path: "/project-management/milestones",
+        description: "Track key project events and deadlines",
+        icon: "🎯",
+      },
     ],
   },
   {
@@ -83,6 +93,12 @@ export const projectManagementSections = [
         path: "/project-management/timesheets",
         description: "Log labor hours against project tasks",
         icon: "⌛",
+      },
+      {
+        title: "Resource Management",
+        path: "/project-management/resources",
+        description: "Manage project team members and equipment",
+        icon: "👥",
       },
     ],
   },
@@ -110,7 +126,7 @@ export const projectManagementSections = [
       },
       {
         title: "Material Utilization",
-        path: "/project-management/material-utilization",
+        path: "/project-management/material-utilizations",
         description: "Track site material consumption against tasks",
         icon: "🔨",
       },
@@ -120,6 +136,18 @@ export const projectManagementSections = [
     title: "Financials & Expenses",
     badge: "Costing",
     items: [
+      {
+        title: "Project Quotations",
+        path: "/project-management/quotations",
+        description: "Draft quotes for clients based on project estimates",
+        icon: "📝",
+      },
+      {
+        title: "Project Invoices",
+        path: "/project-management/project-invoices",
+        description: "Bill clients for completed project work",
+        icon: "🧾",
+      },
       {
         title: "Project Direct Expenses",
         path: "/project-management/expenses",
@@ -138,12 +166,7 @@ export const projectManagementSections = [
     title: "Reports & Analytics",
     badge: "BI",
     items: [
-      {
-        title: "Project Reports Hub",
-        path: "/project-management/reports",
-        description: "All project analytical and financial reports",
-        icon: "📊",
-      },
+
       {
         title: "Project Status Report",
         path: "/project-management/reports/project-status",
@@ -373,6 +396,22 @@ export default function ProjectManagementHome() {
         <Route path="/project-orders/new" element={<ProjectOrderForm />} />
         <Route path="/project-orders/:id" element={<ProjectOrderForm />} />
 
+        <Route path="/quotations" element={<ProjectQuotationList />} />
+        <Route path="/quotations/new" element={<ProjectQuotationForm />} />
+        <Route path="/quotations/:id" element={<ProjectQuotationForm />} />
+
+        <Route path="/project-invoices" element={<ProjectInvoiceList />} />
+        <Route path="/project-invoices/new" element={<ProjectInvoiceForm />} />
+        <Route
+          path="/project-invoices/:id"
+          element={<ProjectInvoiceForm />}
+        />
+
+        <Route path="/milestones" element={<ProjectManagementDashboardPage />} />
+        <Route path="/resources" element={<ProjectManagementDashboardPage />} />
+        <Route path="/timesheets" element={<TimesheetList />} />
+        <Route path="/income" element={<ProjectIncomeList />} />
+
         <Route
           path="/purchase-requisitions"
           element={<PMPurchaseRequisitionList />}
@@ -441,8 +480,44 @@ export const projectManagementFeatures = [
   },
   {
     module_key: "project-management",
+    label: "Timesheets",
+    path: "/project-management/timesheets",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Project Income",
+    path: "/project-management/income",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Milestones",
+    path: "/project-management/milestones",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Resource Management",
+    path: "/project-management/resources",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
     label: "Project Orders",
     path: "/project-management/project-orders",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Project Quotations",
+    path: "/project-management/quotations",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Project Invoices",
+    path: "/project-management/project-invoices",
     type: "feature",
   },
   {
@@ -451,12 +526,7 @@ export const projectManagementFeatures = [
     path: "/project-management/purchase-requisitions",
     type: "feature",
   },
-  {
-    module_key: "project-management",
-    label: "Project Reports",
-    path: "/project-management/reports",
-    type: "dashboard",
-  },
+
   {
     module_key: "project-management",
     label: "Project Status Report",
@@ -473,6 +543,18 @@ export const projectManagementFeatures = [
     module_key: "project-management",
     label: "Project Expense Report",
     path: "/project-management/reports/project-expense",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Task Management Report",
+    path: "/project-management/reports/task-management",
+    type: "feature",
+  },
+  {
+    module_key: "project-management",
+    label: "Task Execution Log",
+    path: "/project-management/reports/task-execution",
     type: "feature",
   },
 ];

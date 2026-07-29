@@ -74,6 +74,25 @@ export function useSocket() {
     ).toLowerCase();
     const transports =
       transportPref === "websocket" ? ["websocket"] : ["polling", "websocket"];
+      
+    const disableSockets =
+      import.meta.env.VITE_DISABLE_SOCKETS === "true" ||
+      (typeof window !== "undefined" && window.location.hostname.includes("omnisuite-erp.com"));
+
+    if (disableSockets) {
+      console.log("Socket.io is disabled in this environment.");
+      const dummySocket = {
+        on: () => {},
+        off: () => {},
+        emit: () => {},
+        disconnect: () => {},
+        connect: () => {},
+        id: "dummy-socket",
+      };
+      setSocket(dummySocket);
+      return;
+    }
+
     const newSocket = io(backendOrigin, {
       path: "/socket.io",
       withCredentials: true,

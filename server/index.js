@@ -61,6 +61,8 @@ import {
   ensureUserBranchMapping,
   ensurePagesTable,
   verifiedTables,
+  ensurePMQuotationTables,
+  ensurePMInvoiceTables
 } from "./utils/dbUtils.js";
 import { seedDefaultTemplates } from "./services/seed-defaults.js";
 import { ensureIndexes } from "./utils/ensureIndexes.js";
@@ -1236,6 +1238,8 @@ if (process.env.NODE_ENV !== "test") {
               () => ensureExceptionalPermissionsTable(),
             ],
             ["system logs", () => ensureSystemLogsTable()],
+            ["pm quotations", () => ensurePMQuotationTables()],
+            ["pm invoices", () => ensurePMInvoiceTables()],
           ];
           for (const [name, fn] of steps) {
             try {
@@ -1264,6 +1268,12 @@ if (process.env.NODE_ENV !== "test") {
         } catch {}
         try {
           await ensureSystemLogsTable();
+        } catch {}
+        try {
+          await ensurePMQuotationTables();
+        } catch {}
+        try {
+          await ensurePMInvoiceTables();
         } catch {}
         try {
           await seedDefaultTemplates();
