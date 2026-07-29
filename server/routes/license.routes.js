@@ -35,8 +35,18 @@ router.use(requireAuth);
 
 router.get("/company/:companyId", getLicense);
 
-// Ensure only super admin can manage licenses
-router.use(requirePermission("admin.licenses.manage"));
+const requireSuperAdmin = (req, res, next) => {
+  const rawId = process.env.LICENSE_SUPER_ADMIN_ID;
+  const superAdminId = rawId ? parseInt(String(rawId).trim(), 10) : 1;
+  const userId = req.user?.sub || req.user?.id;
+  if (userId && Number(userId) === Number(superAdminId)) {
+    return next();
+  }
+  requirePermission("admin.licenses.manage")(req, res, next);
+};
+
+// Ensure only super admin (or users with specific permission) can manage licenses
+router.use(requireSuperAdmin);
 
 router.get("/companies", getCompaniesForLicense);
 router.post("/", saveLicense);
