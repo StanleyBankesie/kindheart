@@ -15354,3 +15354,26 @@ Error: Invalid id
     at file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/routes/sales.route.js:2611:15
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 --------------------------------------------------------------------------------
+
+[2026-07-29T01:21:54.026Z] HTTP_400
+Summary: Invalid id
+Request: GET /api/sales/quotations/next-no (status 400)
+Context:
+status: 400
+code: VALIDATION_ERROR
+method: GET
+url: /api/sales/quotations/next-no
+ip: ::1
+origin: 
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: 1
+companyId: 1
+branchId: 1
+body: {}
+query: {}
+Technical details:
+Error: Invalid id
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/routes/sales.route.js:2611:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------
