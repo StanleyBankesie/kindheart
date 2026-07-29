@@ -60,7 +60,20 @@ export default function DashboardPermissions() {
     const base = Object.entries(MODULES_REGISTRY).map(([key, val]) => {
       const fromRegistry = Array.isArray(val.dashboards) ? val.dashboards : [];
       const existing = new Set(fromRegistry.map((d) => String(d.key || "")));
-      const extras = [{ key: "dashboard", name: "Dashboard" }];
+      const modulesWithDashboard = new Set([
+        "sales",
+        "purchase",
+        "inventory",
+        "finance",
+        "human-resources",
+        "maintenance",
+        "pos",
+        "project-management",
+        "service-management",
+        "business-intelligence",
+        "executive-overview"
+      ]);
+      const extras = modulesWithDashboard.has(key) ? [{ key: "dashboard", name: "Dashboard" }] : [];
       if (key === "business-intelligence") {
         extras.unshift({ key: "dashboards", name: "Dashboards" });
       }
@@ -452,9 +465,6 @@ export default function DashboardPermissions() {
                                   });
                                   const label = m.name || String(m.key || "").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
                                   toast.success(`${val ? "✅" : "🚫"} ${label} — all permissions ${val ? "enabled" : "disabled"}`, { autoClose: 2000 });
-                                  if (Number(selectedUserId) === Number(user?.id)) {
-                                    refreshPermissions();
-                                  }
                                 } catch {
                                   toast.error("Failed to save permissions");
                                 }

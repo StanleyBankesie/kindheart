@@ -22,10 +22,11 @@ export const MODULES_REGISTRY = {
       { key: "workflows", label: "Workflow Configuration", type: "feature" },
       { key: "workflow-approvals", label: "Workflow Approvals", type: "feature" },
       { key: "document-review", label: "Document Review", type: "feature" },
+      { key: "system-log-book", label: "System Log Book Report", type: "feature" },
+      { key: "user-login-activity", label: "User Login Activity Report", type: "feature" },
     ],
     dashboards: [
-      { key: "system-log-book", label: "System Log Book Report", type: "dashboard" },
-      { key: "user-login-activity", label: "User Login Activity Report", type: "dashboard" },
+      { key: "dashboard", label: "Administration Dashboard", type: "dashboard" }
     ]
   },
 

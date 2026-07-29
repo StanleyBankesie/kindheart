@@ -769,32 +769,7 @@ export const PermissionProvider = ({ children }) => {
     const fk = String(featureKey || "").trim();
     if (!fk) return false;
     if (isSuper) return true;
-    try {
-      const path =
-        (typeof window !== "undefined" &&
-          window.location &&
-          window.location.pathname) ||
-        "/";
-      const base = basePathFrom ? basePathFrom(path) : path;
-      if (base && pagePermsByPath && pagePermsByPath.has(base)) {
-        const perms = pagePermsByPath.get(base);
-        const k =
-          action === "view"
-            ? "can_view"
-            : action === "create"
-              ? "can_create"
-              : action === "edit"
-                ? "can_edit"
-                : action === "delete"
-                  ? "can_delete"
-                  : `can_${action}`;
-        // Return the definitive page-level value (true OR false)
-        // — do NOT fall through, otherwise role defaults override user-specific denials
-        if (typeof perms?.[k] === "boolean") {
-          return perms[k];
-        }
-      }
-    } catch {}
+
     const sess = sessionOverrides.get(fk);
     if (sess) {
       const k =

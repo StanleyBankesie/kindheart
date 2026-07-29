@@ -27,6 +27,7 @@ import ExceptionalPermissionsList from "./access-control/ExceptionalPermissionsL
 import UserPermissions from "./access-control/UserPermissionsNew.jsx";
 import DashboardPermissions from "../../../pages/admin/DashboardPermissions.jsx";
 import NotificationSettings from "./notifications/NotificationSettings.jsx";
+import AdminAnalytics from "../business-intelligence/AdminAnalytics.jsx";
 
 export const administrationSections = [
   {
@@ -243,6 +244,9 @@ function AdministrationLanding() {
     <ModuleDashboard
       title="Administration"
       description="System configuration and user management"
+      headerActions={[
+        { label: "Dashboard", path: "/administration/dashboard", icon: "📊" }
+      ]}
       stats={stats}
       quickActions={quickActions}
       sections={administrationSections}
@@ -261,6 +265,7 @@ export default function AdministrationHome() {
     <ModuleLayout sections={administrationSections} moduleKey="administration">
       <Routes>
         <Route path="/" element={<AdministrationLanding />} />
+        <Route path="/dashboard" element={<div className="p-6"><AdminAnalytics /></div>} />
       <Route path="/users" element={<UserList />} />
       <Route path="/users/new" element={<UserForm />} />
       <Route path="/users/:id" element={<UserForm />} />

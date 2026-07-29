@@ -43,9 +43,10 @@ export async function requireAuth(req, res, next) {
     const cookies = parseCookieHeader(req.headers.cookie || "");
     const sessionId = cookies.omnisuite_session;
     const authHeader = String(req.headers.authorization || "");
+    const customHeader = String(req.headers["x-access-token"] || "");
     const bearerToken = authHeader.startsWith("Bearer ")
       ? authHeader.slice(7).trim()
-      : "";
+      : customHeader.trim();
 
     const debugAuth = String(process.env.DEBUG_AUTH || "").trim() === "1";
     if (debugAuth) {

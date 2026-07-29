@@ -62,7 +62,7 @@ import {
   ensurePagesTable,
   verifiedTables,
   ensurePMQuotationTables,
-  ensurePMInvoiceTables
+  ensurePMInvoiceTables,
 } from "./utils/dbUtils.js";
 import { seedDefaultTemplates } from "./services/seed-defaults.js";
 import { ensureIndexes } from "./utils/ensureIndexes.js";
@@ -127,7 +127,11 @@ const app = express();
 app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
-  if (req.url.includes("licenses/global-status") || req.url.includes("login") || req.url.includes("payment-packages")) {
+  if (
+    req.url.includes("licenses/global-status") ||
+    req.url.includes("login") ||
+    req.url.includes("payment-packages")
+  ) {
     const logStr = `[DEBUG ROUTING] [${new Date().toISOString()}] Incoming request: ${req.method} ${req.url} (Original: ${req.originalUrl})\n`;
     fs.appendFileSync(path.join(process.cwd(), "DEBUG_ROUTING.txt"), logStr);
   }
@@ -376,8 +380,8 @@ const allowedOrigins = (() => {
     : [];
 
   // Always allow the production frontend domain by default
-  if (!origins.includes("https://kindheart.omnisuite-erp.com")) {
-    origins.push("https://kindheart.omnisuite-erp.com");
+  if (!origins.includes("https://kindtreat.omnisuite-erp.com")) {
+    origins.push("https://kindtreat.omnisuite-erp.com");
   }
   return origins;
 })();

@@ -15377,3 +15377,118 @@ Error: Invalid id
     at file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/routes/sales.route.js:2611:15
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 --------------------------------------------------------------------------------
+
+[2026-07-29T15:47:02.962Z] HTTP_400
+Summary: User limit exceeded. Please upgrade your subscription.
+Request: POST /api/admin/users (status 400)
+Context:
+status: 400
+code: LICENSE_LIMIT_EXCEEDED
+method: POST
+url: /api/admin/users
+ip: ::1
+origin: http://localhost:5173
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: 1
+companyId: null
+branchId: null
+body: {"company_id":1,"branch_id":1,"branch_ids":[1],"username":"aja","email":"aja@gmail.com","telephone":"","full_name":"Aja Musah","is_active":true,"profile_picture":null,"is_employee":true,"user_type":"Internal","valid_from":"2026-07-29","valid_to":"2027-07-29","role_id":5,"password_hash":"[REDACTED]"}
+query: {}
+Technical details:
+Error: User limit exceeded. Please upgrade your subscription.
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at createUser (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/controllers/users.controller.js:245:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------
+
+[2026-07-29T15:48:56.053Z] HTTP_400
+Summary: User limit exceeded. Please upgrade your subscription.
+Request: POST /api/admin/users (status 400)
+Context:
+status: 400
+code: LICENSE_LIMIT_EXCEEDED
+method: POST
+url: /api/admin/users
+ip: ::1
+origin: http://localhost:5173
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: 1
+companyId: null
+branchId: null
+body: {"company_id":1,"branch_id":1,"branch_ids":[1],"username":"aja","email":"aja@gmail.com","telephone":"","full_name":"Aja Musah","is_active":true,"profile_picture":null,"is_employee":true,"user_type":"Internal","valid_from":"2026-07-29","valid_to":"2027-07-29","role_id":5,"password_hash":"[REDACTED]"}
+query: {}
+Technical details:
+Error: User limit exceeded. Please upgrade your subscription.
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at createUser (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/controllers/users.controller.js:245:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------
+
+[2026-07-29T15:48:59.801Z] HTTP_400
+Summary: User limit exceeded. Please upgrade your subscription.
+Request: POST /api/admin/users (status 400)
+Context:
+status: 400
+code: LICENSE_LIMIT_EXCEEDED
+method: POST
+url: /api/admin/users
+ip: ::1
+origin: http://localhost:5173
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: 1
+companyId: null
+branchId: null
+body: {"company_id":1,"branch_id":1,"branch_ids":[1],"username":"aja","email":"aja@gmail.com","telephone":"","full_name":"Aja Musah","is_active":true,"profile_picture":null,"is_employee":true,"user_type":"Internal","valid_from":"2026-07-29","valid_to":"2027-07-29","role_id":5,"password_hash":"[REDACTED]"}
+query: {}
+Technical details:
+Error: User limit exceeded. Please upgrade your subscription.
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at createUser (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/controllers/users.controller.js:245:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------
+
+[2026-07-29T15:50:15.645Z] HTTP_400
+Summary: User limit exceeded. Please upgrade your subscription.
+Request: POST /api/admin/users (status 400)
+Context:
+status: 400
+code: LICENSE_LIMIT_EXCEEDED
+method: POST
+url: /api/admin/users
+ip: ::1
+origin: http://localhost:5173
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: 1
+companyId: null
+branchId: null
+body: {"company_id":1,"branch_id":1,"branch_ids":[1],"username":"aja","email":"aja@gmail.com","telephone":"","full_name":"Aja Musah","is_active":true,"profile_picture":null,"is_employee":false,"user_type":"Internal","valid_from":"2026-07-29","valid_to":"2026-07-31","role_id":5,"password_hash":"[REDACTED]"}
+query: {}
+Technical details:
+Error: User limit exceeded. Please upgrade your subscription.
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at createUser (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/controllers/users.controller.js:245:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------
+
+[2026-07-29T15:54:22.850Z] HTTP_401
+Summary: Invalid credentials
+Request: POST /api/login (status 401)
+Context:
+status: 401
+code: INVALID_CREDENTIALS
+method: POST
+url: /api/login
+ip: ::1
+origin: http://localhost:5173
+userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+userId: null
+companyId: null
+branchId: null
+body: {"username":"aja","password":"[REDACTED]","rememberMe":false}
+query: {}
+Technical details:
+Error: Invalid credentials
+    at httpError (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/utils/httpError.js:16:15)
+    at login (file:///C:/Users/stanl/OneDrive/Documents/Stanness%20Technologies/kindheart/server/controllers/auth.controller.js:428:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+--------------------------------------------------------------------------------

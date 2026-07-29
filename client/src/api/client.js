@@ -57,14 +57,18 @@ let API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 if (
   typeof window !== "undefined" &&
-  window.location.hostname.includes("kindheart.omnisuite-erp.com")
+  window.location.hostname.includes("kindtreat.omnisuite-erp.com")
 ) {
   // Frontend is kindheart, backend is kindserver
   API_BASE = "https://kindserver.omnisuite-erp.com/api";
 } else if (!API_BASE) {
   // Default to same-origin so Vite dev proxy handles local API traffic.
   API_BASE = "/api";
-} else if (API_BASE && !API_BASE.startsWith("http") && !API_BASE.startsWith("/")) {
+} else if (
+  API_BASE &&
+  !API_BASE.startsWith("http") &&
+  !API_BASE.startsWith("/")
+) {
   API_BASE = "/" + API_BASE;
 }
 api.defaults.baseURL = API_BASE;
@@ -238,8 +242,10 @@ api.interceptors.request.use(
     if (accessToken) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers["X-Access-Token"] = accessToken; // Nginx proxy bypass
     } else if (config.headers?.Authorization) {
       delete config.headers.Authorization;
+      delete config.headers["X-Access-Token"];
     }
     return config;
   },
