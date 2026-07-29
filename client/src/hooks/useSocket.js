@@ -67,17 +67,20 @@ export function useSocket() {
       globalHolder.authKey = "";
     }
 
-    const backendOrigin =
+    let backendOrigin =
       import.meta.env.VITE_API_PROXY_TARGET || window.location.origin;
+      
+    if (typeof window !== "undefined" && window.location.hostname.includes("kindheart.omnisuite-erp.com")) {
+      backendOrigin = "https://kindserver.omnisuite-erp.com";
+    }
+
     const transportPref = (
       import.meta.env.VITE_SOCKET_TRANSPORT || ""
     ).toLowerCase();
     const transports =
       transportPref === "websocket" ? ["websocket"] : ["polling", "websocket"];
       
-    const disableSockets =
-      import.meta.env.VITE_DISABLE_SOCKETS === "true" ||
-      (typeof window !== "undefined" && window.location.hostname.includes("omnisuite-erp.com"));
+    const disableSockets = import.meta.env.VITE_DISABLE_SOCKETS === "true";
 
     if (disableSockets) {
       console.log("Socket.io is disabled in this environment.");
