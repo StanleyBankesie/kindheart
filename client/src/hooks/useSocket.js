@@ -70,7 +70,7 @@ export function useSocket() {
     let backendOrigin =
       import.meta.env.VITE_API_PROXY_TARGET || window.location.origin;
       
-    if (typeof window !== "undefined" && window.location.hostname.includes("kindheart.omnisuite-erp.com")) {
+    if (typeof window !== "undefined" && (window.location.hostname.includes("kindheart.omnisuite-erp.com") || window.location.hostname.includes("kindtreat.omnisuite-erp.com"))) {
       backendOrigin = "https://kindserver.omnisuite-erp.com";
     }
 
