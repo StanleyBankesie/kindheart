@@ -78,7 +78,11 @@ export function useSocket() {
       import.meta.env.VITE_SOCKET_TRANSPORT || ""
     ).toLowerCase();
     const transports =
-      transportPref === "websocket" ? ["websocket"] : ["polling", "websocket"];
+      transportPref === "websocket"
+        ? ["websocket"]
+        : transportPref === "polling"
+        ? ["polling"]
+        : ["polling", "websocket"];
       
     const disableSockets = import.meta.env.VITE_DISABLE_SOCKETS === "true";
 
