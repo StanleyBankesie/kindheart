@@ -104,11 +104,13 @@ export default function GeneralSettingsPage() {
 
   async function loadLoginBackgroundMeta() {
     try {
-      const res = await api.get("/admin/settings/login-background/meta");
-      const hasBackground = !!res?.data?.hasBackground;
-      const version = res?.data?.updatedAt || Date.now();
-      setLoginBackgroundVersion(String(version || ""));
-      setLoginBackgroundUrl(hasBackground ? `/api/admin/settings/login-background?v=${encodeURIComponent(String(version))}` : "");
+      const res = await api.get("/admin/settings/login-bg-info");
+      if (res.data) {
+        const hasBackground = !!res?.data?.hasBackground;
+        const version = res?.data?.updatedAt || Date.now();
+        setLoginBackgroundVersion(String(version || ""));
+        setLoginBackgroundUrl(hasBackground ? `/api/admin/settings/login-background?v=${encodeURIComponent(String(version))}` : "");
+      }
     } catch {
       setLoginBackgroundUrl("");
       setLoginBackgroundVersion("");
@@ -247,7 +249,7 @@ export default function GeneralSettingsPage() {
               <h1 className="text-2xl font-bold dark:text-brand-300">General Settings</h1>
               <p className="text-sm mt-1">Configure global application variables</p>
             </div>
-            <Link to="/system-configuration" className="btn btn-secondary">Return to Menu</Link>
+            <Link to="/system-configuration?section=System%20Configuration" className="btn btn-secondary">Back</Link>
           </div>
         </div>
       </div>

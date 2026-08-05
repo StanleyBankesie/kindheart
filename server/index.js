@@ -126,18 +126,6 @@ const serveFrontendFlag = (() => {
 const app = express();
 app.set("trust proxy", 1);
 
-app.use((req, res, next) => {
-  if (
-    req.url.includes("licenses/global-status") ||
-    req.url.includes("login") ||
-    req.url.includes("payment-packages")
-  ) {
-    const logStr = `[DEBUG ROUTING] [${new Date().toISOString()}] Incoming request: ${req.method} ${req.url} (Original: ${req.originalUrl})\n`;
-    fs.appendFileSync(path.join(process.cwd(), "DEBUG_ROUTING.txt"), logStr);
-  }
-  next();
-});
-
 // Hook res.writeHead at the request level to completely strip connection headers,
 // bypassing any custom subclassing by Passenger.
 app.use((req, res, next) => {
@@ -380,8 +368,8 @@ const allowedOrigins = (() => {
     : [];
 
   // Always allow the production frontend domain by default
-  if (!origins.includes("https://erp.multisolutionseng.com")) {
-    origins.push("https://erp.multisolutionseng.com");
+  if (!origins.includes("https://kindtreat.omnisuite-erp.com")) {
+    origins.push("https://kindtreat.omnisuite-erp.com");
   }
   return origins;
 })();
@@ -1011,7 +999,7 @@ app.use("/", requireLicense);
 
 const apiPaths = [
   { path: "/licenses", router: licenseRoutes },
-  { path: "/payment-packages", router: paymentPackageRoutes },
+  { path: "/subscription-plans", router: paymentPackageRoutes },
   { path: "/admin", router: adminRoutes },
   { path: "/administration", router: adminRoutes },
   { path: "/backups", router: backupRoutes },
@@ -1041,6 +1029,35 @@ const apiPaths = [
   { path: "/visitors", router: visitorsRoutes },
 ];
 
+// Debug Endpoint to view production crash reports directly from the browser
+app.get("/api/debug-status", async (req, res) => {
+  try {
+    const fs = await import("fs");
+    const path = await import("path");
+    let crashReport = "No crash report found.";
+    const crashPath = path.join(process.cwd(), "CRASH_REPORT.txt");
+    if (fs.existsSync(crashPath)) {
+      crashReport = fs.readFileSync(crashPath, "utf8");
+    }
+
+    const dbHealth = await (
+      await import("./db/pool.js")
+    ).getDbHealth({ probe: true });
+    const dbConfig = await (await import("./db/pool.js")).getDbConfig();
+
+    res.json({
+      ok: true,
+      dbHealth,
+      dbConfig,
+      crashReport,
+      nodeEnv: process.env.NODE_ENV,
+      cwd: process.cwd(),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message, stack: err.stack });
+  }
+});
+
 apiPaths.forEach(({ path, router }) => {
   app.use(`/api${path}`, router);
   app.use(path, router);
@@ -1048,6 +1065,17 @@ apiPaths.forEach(({ path, router }) => {
 
 app.use("/api", authRoutes);
 app.use("/", authRoutes);
+
+// Intercept Socket.io requests explicitly because Passenger intercepts the http.Server hook
+app.use("/socket.io", (req, res, next) => {
+  if (ioInstance && ioInstance.engine) {
+    req.url = req.originalUrl; // Express strips the mount path, but engine.io needs it!
+    ioInstance.engine.handleRequest(req, res);
+  } else {
+    // If socket.io is disabled, return 400 to tell the frontend client to stop polling
+    res.status(400).json({ error: "Socket.io disabled by server" });
+  }
+});
 
 /* ---------------- STATIC FILES & SPA FALLBACK ---------------- */
 // Use the frontend path already discovered by the early static block above.
@@ -1140,7 +1168,7 @@ if (_spaFrontendPath && serveFrontendFlag) {
 }
 
 /* ---------------- ERRORS ---------------- */
-// app.use(notFound); // Handled by SPA catch-all now, or use for API 404s if desired
+app.use(notFound); // Handled by SPA catch-all now, or use for API 404s if desired
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 4002;
